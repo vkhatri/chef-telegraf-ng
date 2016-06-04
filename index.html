@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Chef Telegraf : Chef Cookbook to Manage Influxdb Telegraf">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Chef Telegraf</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/vkhatri/chef-telegraf-ng">View on GitHub</a>
+
+          <h1 id="project_title">Chef Telegraf</h1>
+          <h2 id="project_tagline">Chef Cookbook to Manage Influxdb Telegraf</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/vkhatri/chef-telegraf-ng/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/vkhatri/chef-telegraf-ng/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="telegraf-ng-cookbook" class="anchor" href="#telegraf-ng-cookbook" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>telegraf-ng Cookbook</h1>
+
+<p><a href="https://github.com/vkhatri/chef-telegraf-ng"><img src="http://img.shields.io/badge/cookbook-v0.0.1-green.svg" alt="Cookbook"></a></p>
+
+<p><a href="https://app.wercker.com/project/bykey/454e213230cc1aff6ac2cce5cd528d32"><img src="https://app.wercker.com/status/454e213230cc1aff6ac2cce5cd528d32/m" alt="wercker status" title="wercker status"></a></p>
+
+<p>This is a <a href="https://www.chef.io/">Chef</a> cookbook to manage <a href="https://docs.influxdata.com/telegraf">InfluxDB</a>.</p>
+
+<blockquote>
+<blockquote>
+<p>For Production environment, always prefer the <a href="https://supermarket.chef.io/cookbooks/telegraf-ng">most recent release</a>.</p>
+</blockquote>
+</blockquote>
+
+<h2>
+<a id="most-recent-release" class="anchor" href="#most-recent-release" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Most Recent Release</h2>
+
+<div class="highlight highlight-source-ruby"><pre>cookbook <span class="pl-s"><span class="pl-pds">'</span>telegraf<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 0.0.1<span class="pl-pds">'</span></span></pre></div>
+
+<h2>
+<a id="from-git" class="anchor" href="#from-git" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>From Git</h2>
+
+<div class="highlight highlight-source-ruby"><pre>cookbook <span class="pl-s"><span class="pl-pds">'</span>telegraf<span class="pl-pds">'</span></span>, <span class="pl-c1">github:</span> <span class="pl-s"><span class="pl-pds">'</span>vkhatri/chef-telegraf<span class="pl-pds">'</span></span>,  <span class="pl-c1">tag:</span> <span class="pl-s"><span class="pl-pds">"</span>v0.0.1<span class="pl-pds">"</span></span></pre></div>
+
+<h2>
+<a id="repository" class="anchor" href="#repository" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Repository</h2>
+
+<pre><code>https://github.com/vkhatri/chef-telegraf-ng
+</code></pre>
+
+<h2>
+<a id="supported-os" class="anchor" href="#supported-os" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supported OS</h2>
+
+<p>This cookbook was tested on Amazon &amp; Ubuntu Linux and expected to work on other RHEL platforms.</p>
+
+<h2>
+<a id="cookbook-dependency" class="anchor" href="#cookbook-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cookbook Dependency</h2>
+
+<p>None</p>
+
+<h2>
+<a id="recipes" class="anchor" href="#recipes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Recipes</h2>
+
+<ul>
+<li><p><code>telegraf::default</code> - default recipe (use it for run_list)</p></li>
+<li><p><code>telegraf::install</code> - install telegraf</p></li>
+<li><p><code>telegraf::config</code> - configure telegraf</p></li>
+<li><p><code>telegraf::inputs</code> - configure telegraf inputs using node attribute <code>node['telegraf']['inputs']</code></p></li>
+<li><p><code>telegraf::outputs</code> - configure telegraf outputs using node attribute <code>node['telegraf']['outputs']</code></p></li>
+<li><p><code>telegraf::service</code> - configure telegraf service</p></li>
+<li><p><code>telegraf::example</code> - examples recipe to configure default inputs/outputs using HWRP</p></li>
+</ul>
+
+<h2>
+<a id="hwrp-telegraf_input" class="anchor" href="#hwrp-telegraf_input" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HWRP telegraf_input</h2>
+
+<p>HWRP <code>telegraf_input</code> creates telegraf inputs configuration files under directory <code>node['telegraf']['conf_d_dir']</code> with file name <code>input-#{resource_name}.conf</code>.</p>
+
+<p><strong>HWRP example</strong></p>
+
+<div class="highlight highlight-source-ruby"><pre>telegraf_input <span class="pl-s"><span class="pl-pds">'</span>cpu<span class="pl-pds">'</span></span> <span class="pl-k">do</span>
+  config <span class="pl-c1">fielddrop:</span> [<span class="pl-s"><span class="pl-pds">'</span>time_*<span class="pl-pds">'</span></span>]
+<span class="pl-k">end</span></pre></div>
+
+<p><strong>HWRP Options</strong></p>
+
+<ul>
+<li>
+<em>action</em> (optional)   - default :create, options: :create, :delete</li>
+<li>
+<em>config</em> (optional, Hash) - telegraf input options</li>
+<li>
+<em>name</em> (optional, String) - telegraf input name</li>
+</ul>
+
+<h2>
+<a id="hwrp-telegraf_output" class="anchor" href="#hwrp-telegraf_output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HWRP telegraf_output</h2>
+
+<p>HWRP <code>telegraf_output</code> creates telegraf outputs configuration files under directory <code>node['telegraf']['conf_d_dir']</code> with file name <code>output-#{resource_name}.conf</code>.</p>
+
+<p><strong>HWRP example</strong></p>
+
+<div class="highlight highlight-source-ruby"><pre>telegraf_output <span class="pl-s"><span class="pl-pds">'</span>influxdb<span class="pl-pds">'</span></span> <span class="pl-k">do</span>
+  config <span class="pl-c1">urls:</span> [<span class="pl-s"><span class="pl-pds">'</span>http://localhost:8086<span class="pl-pds">'</span></span>], <span class="pl-c1">database:</span> <span class="pl-s"><span class="pl-pds">'</span>telegraf<span class="pl-pds">'</span></span>, <span class="pl-c1">precision:</span> <span class="pl-s"><span class="pl-pds">'</span>s<span class="pl-pds">'</span></span>
+<span class="pl-k">end</span></pre></div>
+
+<p><strong>HWRP Options</strong></p>
+
+<ul>
+<li>
+<em>action</em> (optional)   - default :create, options: :create, :delete</li>
+<li>
+<em>config</em> (optional, Hash) - telegraf output options</li>
+<li>
+<em>name</em> (optional, String) - telegraf output name</li>
+</ul>
+
+<h2>
+<a id="how-to-add-telegraf-input-via-node-attribute" class="anchor" href="#how-to-add-telegraf-input-via-node-attribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Add Telegraf Input via Node Attribute</h2>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>default_attributes<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>telegraf<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>inputs<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>cpu<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>fielddrop<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>time_*<span class="pl-pds">"</span></span>]
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>disk<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>ignore_fs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>tmpfs<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>devtmpfs<span class="pl-pds">"</span></span>]
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>diskio<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>kernel<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>mem<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>processes<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>net<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>interfaces<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>eth0<span class="pl-pds">"</span></span>]
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>swap<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>system<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>ntpq<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>netstat<span class="pl-pds">"</span></span>: {},
+        <span class="pl-s"><span class="pl-pds">"</span>procstat<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/usr/bin/telegraf<span class="pl-pds">"</span></span>
+        }
+      }
+    }
+  }
+}</pre></div>
+
+<h2>
+<a id="how-to-add-telegraf-output-via-node-attribute" class="anchor" href="#how-to-add-telegraf-output-via-node-attribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Add Telegraf Output via Node Attribute</h2>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>default_attributes<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>telegraf<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>outputs<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>influxdb<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>urls<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>http://localhost:8086<span class="pl-pds">"</span></span>],
+          <span class="pl-s"><span class="pl-pds">"</span>database<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>telegraf<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>precision<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>s<span class="pl-pds">"</span></span>
+        }
+      }
+    }
+  }
+}</pre></div>
+
+<h2>
+<a id="core-attributes" class="anchor" href="#core-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Core Attributes</h2>
+
+<ul>
+<li><p><code>default['telegraf']['version']</code> (default: <code>nil</code>): telegraf version, default install latest</p></li>
+<li><p><code>default['telegraf']['conf_dir']</code> (default: <code>/etc/telegraf</code>): telegraf toml configuration file directory</p></li>
+<li><p><code>default['telegraf']['conf_d_dir']</code> (default: <code>/etc/telegraf/telegraf.d</code>): telegraf inputs/outputs configuration files directory</p></li>
+<li><p><code>default['telegraf']['conf_file']</code> (default: <code>/etc/telegraf/telegraf.conf</code>): telegraf configuration file</p></li>
+<li><p><code>default['telegraf']['notify_restart']</code> (default: <code>true</code>): whether to restart telegraf service on configuration file change</p></li>
+<li><p><code>default['telegraf']['disable_service']</code> (default: <code>false</code>): whether to stop and disable telegraf service</p></li>
+<li><p><code>default['telegraf']['user']</code> (default: <code>telegraf</code>): telegraf user</p></li>
+<li><p><code>default['telegraf']['group']</code> (default: <code>telegraf</code>): telegraf group</p></li>
+</ul>
+
+<h2>
+<a id="configuration-file-telegrafconf-attributes" class="anchor" href="#configuration-file-telegrafconf-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration File telegraf.conf Attributes</h2>
+
+<ul>
+<li><p><code>default['telegraf']['config']['tags']</code> (default: <code>{}</code>): telegraf global tags</p></li>
+<li><p><code>default['telegraf']['config']['agent']['interval']</code> (default: <code>10s</code>): telegraf agent configuration parameter</p></li>
+<li><p><code>default['telegraf']['config']['agent']['round_interval']</code> (default: <code>true</code>): telegraf agent configuration parameter</p></li>
+<li><p><code>default['telegraf']['config']['agent']['flush_interval']</code> (default: <code>10s</code>): telegraf agent configuration parameter</p></li>
+<li><p><code>default['telegraf']['config']['agent']['flush_jitter']</code> (default: <code>5s</code>): telegraf agent configuration parameter</p></li>
+</ul>
+
+<h2>
+<a id="telegraf-yumapt-repository-attributes" class="anchor" href="#telegraf-yumapt-repository-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>telegraf YUM/APT Repository Attributes</h2>
+
+<ul>
+<li><p><code>default['telegraf']['yum']['description']</code> (default: ``): telegraf yum reporitory attribute</p></li>
+<li><p><code>default['telegraf']['yum']['gpgcheck']</code> (default: <code>true</code>): telegraf yum reporitory attribute</p></li>
+<li><p><code>default['telegraf']['yum']['enabled']</code> (default: <code>true</code>): telegraf yum reporitory attribute</p></li>
+<li><p><code>default['telegraf']['yum']['baseurl']</code> (default: <code>calculated</code>): telegraf yum reporitory attribute</p></li>
+<li><p><code>default['telegraf']['yum']['gpgkey']</code> (default: <code>https://repos.influxdata.com/influxdb.key</code>): telegraf yum reporitory attribute</p></li>
+<li><p><code>default['telegraf']['yum']['action']</code> (default: <code>:create</code>): telegraf yum reporitory attribute</p></li>
+<li><p><code>default['telegraf']['apt']['description']</code> (default: ``): telegraf apt reporitory attribute</p></li>
+<li><p><code>default['telegraf']['apt']['components']</code> (default: <code>['stable']</code>): telegraf apt reporitory attribute</p></li>
+<li><p><code>default['telegraf']['apt']['uri']</code> (default: <code>https//repos.influxdata.com/debian</code>): telegraf apt reporitory attribute</p></li>
+<li><p><code>default['telegraf']['apt']['key']</code> (default: <code>https//repos.influxdata.com/influxdb.key</code>): telegraf apt reporitory attribute</p></li>
+<li><p><code>default['telegraf']['apt']['action']</code> (default: <code>:add</code>): telegraf apt reporitory attribute</p></li>
+</ul>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork the repository on Github</li>
+<li>Create a named feature branch (like <code>add_component_x</code>)</li>
+<li>Write your change</li>
+<li>Write tests for your change (if applicable)</li>
+<li>Run the tests (<code>rake &amp; rake knife</code>), ensuring they all pass</li>
+<li>Write new resource/attribute description to <code>README.md</code>
+</li>
+<li>Write description about changes to PR</li>
+<li>Submit a Pull Request using Github</li>
+</ol>
+
+<h2>
+<a id="copyright--license" class="anchor" href="#copyright--license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copyright &amp; License</h2>
+
+<p>Authors:: Virender Khatri and <a href="https://github.com/vkhatri/chef-telegraf-ng/graphs/contributors">Contributors</a></p>
+
+<pre>
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Chef Telegraf maintained by <a href="https://github.com/vkhatri">vkhatri</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
