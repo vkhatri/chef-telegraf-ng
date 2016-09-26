@@ -41,5 +41,6 @@ end
 
 package 'telegraf' do
   version if node['telegraf']['version']
+  options node['telegraf']['apt']['options'] if node['telegraf']['apt']['options'] && node['platform_family'] == 'debian'
   notifies :restart, 'service[telegraf]' if node['telegraf']['notify_restart'] && !node['telegraf']['disable_service']
 end

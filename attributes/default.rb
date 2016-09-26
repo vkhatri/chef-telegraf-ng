@@ -20,9 +20,10 @@ default['telegraf']['yum']['enabled'] = true
 default['telegraf']['yum']['gpgkey'] = 'https://repos.influxdata.com/influxdb.key'
 default['telegraf']['yum']['action'] = :create
 
-default['telegraf']['apt']['uri'] = 'https://repos.influxdata.com/debian'
+default['telegraf']['apt']['uri'] = "https://repos.influxdata.com/#{node['platform']}"
 default['telegraf']['apt']['description'] = 'InfluxDB Repository'
 default['telegraf']['apt']['components'] = %w(stable)
-# default['telegraf']['apt']['distribution'] = ''
+default['telegraf']['apt']['distribution'] = node['lsb']['codename']
 default['telegraf']['apt']['action'] = :add
 default['telegraf']['apt']['key'] = 'https://repos.influxdata.com/influxdb.key'
+default['telegraf']['apt']['options'] = "-o Dpkg::Options::='--force-confnew'"
