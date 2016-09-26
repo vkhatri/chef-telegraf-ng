@@ -53,8 +53,8 @@ package 'telegraf' do # ~FC009
   options node['telegraf']['apt']['options'] if node['telegraf']['apt']['options'] && node['platform_family'] == 'debian'
   notifies :restart, 'service[telegraf]' if node['telegraf']['notify_restart'] && !node['telegraf']['disable_service']
   if node['platform_family'] == 'rhel'
-	  flush_cache(:before => true)
-	  allow_downgrade true
+    flush_cache(:before => true)
+    allow_downgrade true
     version version_string
   end
 end
