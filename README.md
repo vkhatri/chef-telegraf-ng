@@ -1,12 +1,12 @@
 telegraf-ng Cookbook
 ================
 
-[![Cookbook](http://img.shields.io/badge/cookbook-v0.0.1-green.svg)](https://github.com/vkhatri/chef-telegraf-ng)
+[![Cookbook](http://img.shields.io/badge/cookbook-v0.0.2-green.svg)](https://github.com/vkhatri/chef-telegraf-ng)
 
 [![wercker status](https://app.wercker.com/status/454e213230cc1aff6ac2cce5cd528d32/m "wercker status")](https://app.wercker.com/project/bykey/454e213230cc1aff6ac2cce5cd528d32)
 
 
-This is a [Chef] cookbook to manage [InfluxDB] [Telegraf].
+This is a [Chef] cookbook to manage InfluxDB [Telegraf].
 
 
 >> For Production environment, always prefer the [most recent release](https://supermarket.chef.io/cookbooks/telegraf-ng).
@@ -15,13 +15,13 @@ This is a [Chef] cookbook to manage [InfluxDB] [Telegraf].
 ## Most Recent Release
 
 ```ruby
-cookbook 'telegraf', '~> 0.0.1'
+cookbook 'telegraf', '~> 0.0.2'
 ```
 
 ## From Git
 
 ```ruby
-cookbook 'telegraf', github: 'vkhatri/chef-telegraf',  tag: "v0.0.1"
+cookbook 'telegraf', github: 'vkhatri/chef-telegraf',  tag: "v0.0.2"
 ```
 
 ## Repository
@@ -40,6 +40,9 @@ This cookbook was tested on Amazon & Ubuntu Linux and expected to work on other 
 
 None
 
+## TODO
+
+- add ubuntu version pin support
 
 ## Recipes
 
@@ -153,7 +156,7 @@ end
 ## Core Attributes
 
 
-* `default['telegraf']['version']` (default: `nil`): telegraf version, default install latest
+* `default['telegraf']['version']` (default: `1.0.0`): telegraf version, applicable only to `rhel` platform
 
 * `default['telegraf']['conf_dir']` (default: `/etc/telegraf`): telegraf toml configuration file directory
 

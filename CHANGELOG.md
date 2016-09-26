@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version of the telegraf cookbook.
 
+0.0.2
+-----
+
+- Virender Khatri - fix toml require at compile time
+
+- Virender Khatri - added yum version pinning
+
+- Virender Khatri - added apt package options
+
+- Virender Khatri - set default version to 1.0.0
+
 0.0.1
 -----
 
