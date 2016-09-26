@@ -1,4 +1,5 @@
-default['telegraf']['version'] = nil
+default['telegraf']['version'] = '1.0.0'
+default['telegraf']['release'] = '1'
 default['telegraf']['disable_service'] = false
 
 default['telegraf']['user'] = 'telegraf'
@@ -18,6 +19,7 @@ default['telegraf']['yum']['description'] = 'InfluxDB Repository - RHEL $release
 default['telegraf']['yum']['gpgcheck'] = true
 default['telegraf']['yum']['enabled'] = true
 default['telegraf']['yum']['gpgkey'] = 'https://repos.influxdata.com/influxdb.key'
+default['telegraf']['yum']['metadata_expire'] = '3h'
 default['telegraf']['yum']['action'] = :create
 
 default['telegraf']['apt']['uri'] = "https://repos.influxdata.com/#{node['platform']}"

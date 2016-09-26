@@ -27,6 +27,8 @@ else
   end.run_action(:install)
 end
 
+include_recipe 'yum-plugin-versionlock::default' if node['platform'] == 'rhel' || node['platform'] == 'centos'
+
 include_recipe 'telegraf-ng::install'
 include_recipe 'telegraf-ng::config'
 include_recipe 'telegraf-ng::inputs'

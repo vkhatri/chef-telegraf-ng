@@ -9,6 +9,8 @@ version          '0.0.1'
 source_url 'https://github.com/vkhatri/chef-telegraf-ng' if respond_to?(:source_url)
 issues_url 'https://github.com/vkhatri/chef-telegraf-ng/issues' if respond_to?(:issues_url)
 
+depends 'yum-plugin-versionlock', '>= 0.1.2'
+
 %w(ubuntu centos amazon redhat fedora).each do |os|
   supports os
 end

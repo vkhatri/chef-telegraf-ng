@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+version_string = node['platform_family'] == 'rhel' ? "#{node['telegraf']['version']}-#{node['telegraf']['release']}" : node['telegraf']['version']
+
 case node['platform_family']
 when 'debian'
   # apt repository configuration
@@ -27,6 +29,7 @@ when 'debian'
     distribution node['telegraf']['apt']['distribution']
     action node['telegraf']['apt']['action']
   end
+
 when 'rhel'
   # yum repository configuration
   yum_repository 'influxdb' do
@@ -35,12 +38,23 @@ when 'rhel'
     gpgcheck node['telegraf']['yum']['gpgcheck']
     gpgkey node['telegraf']['yum']['gpgkey']
     enabled node['telegraf']['yum']['enabled']
+    metadata_expire node['telegraf']['yum']['metadata_expire']
     action node['telegraf']['yum']['action']
+  end
+
+  yum_version_lock 'telegraf' do
+    version node['telegraf']['version']
+    release node['telegraf']['release']
+    action :update
   end
 end
 
-package 'telegraf' do
-  version if node['telegraf']['version']
+package 'telegraf' do # ~FC009
   options node['telegraf']['apt']['options'] if node['telegraf']['apt']['options'] && node['platform_family'] == 'debian'
   notifies :restart, 'service[telegraf]' if node['telegraf']['notify_restart'] && !node['telegraf']['disable_service']
+  if node['platform_family'] == 'rhel'
+	  flush_cache(:before => true)
+	  allow_downgrade true
+    version version_string
+  end
 end
