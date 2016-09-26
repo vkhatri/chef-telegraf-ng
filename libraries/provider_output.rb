@@ -1,5 +1,3 @@
-require 'toml'
-
 class Chef
   class Provider
     # provides telegraf_output
@@ -29,6 +27,8 @@ class Chef
       protected
 
       def config_file
+        require 'toml'
+
         file_content = TOML.dump('outputs' => { new_resource.name => [new_resource.config] })
 
         t = Chef::Resource::File.new("output_#{new_resource.name}", run_context)
