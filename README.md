@@ -156,7 +156,9 @@ end
 ## Core Attributes
 
 
-* `default['telegraf']['version']` (default: `1.0.0`): telegraf version, applicable only to `rhel` platform
+* `default['telegraf']['version']` (default: `1.2.1`): telegraf version, applicable only to `rhel` platform
+
+* `default['telegraf']['ignore_version']` (default: `false`): ignore telegraf version
 
 * `default['telegraf']['conf_dir']` (default: `/etc/telegraf`): telegraf toml configuration file directory
 

@@ -30,6 +30,13 @@ when 'debian'
     action node['telegraf']['apt']['action']
   end
 
+  unless node['telegraf']['ignore_version'] # ~FC023
+    apt_preference 'telegraf' do
+      pin          "version #{node['telegraf']['version']}"
+      pin_priority '700'
+    end
+  end
+
 when 'rhel'
   # yum repository configuration
   yum_repository 'influxdb' do
@@ -42,14 +49,17 @@ when 'rhel'
     action node['telegraf']['yum']['action']
   end
 
-  yum_version_lock 'telegraf' do
-    version node['telegraf']['version']
-    release node['telegraf']['release']
-    action :update
+  unless node['telegraf']['ignore_version'] # ~FC023
+    yum_version_lock 'telegraf' do
+      version node['telegraf']['version']
+      release node['telegraf']['release']
+      action :update
+    end
   end
 end
 
 package 'telegraf' do # ~FC009
+  version version_string unless node['telegraf']['ignore_version']
   options node['telegraf']['apt']['options'] if node['telegraf']['apt']['options'] && node['platform_family'] == 'debian'
   notifies :restart, 'service[telegraf]' if node['telegraf']['notify_restart'] && !node['telegraf']['disable_service']
   if node['platform_family'] == 'rhel'

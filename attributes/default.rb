@@ -1,10 +1,11 @@
-default['telegraf']['version'] = '1.0.0'
+default['telegraf']['version'] = '1.2.1'
 default['telegraf']['release'] = '1'
 default['telegraf']['disable_service'] = false
 
 default['telegraf']['user'] = 'telegraf'
 default['telegraf']['group'] = 'telegraf'
 
+default['telegraf']['ignore_version'] = true
 default['telegraf']['notify_restart'] = true
 default['telegraf']['conf_dir'] = '/etc/telegraf'
 default['telegraf']['conf_d_dir'] = ::File.join(node['telegraf']['conf_dir'], 'telegraf.d')
