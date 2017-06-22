@@ -20,6 +20,6 @@
 require 'toml'
 
 file node['telegraf']['conf_file'] do
-  content TOML.dump(node['telegraf']['config'])
+  content TOML::Generator.new(node['telegraf']['config']).body
   notifies :restart, 'service[telegraf]' if node['telegraf']['notify_restart'] && !node['telegraf']['disable_service']
 end

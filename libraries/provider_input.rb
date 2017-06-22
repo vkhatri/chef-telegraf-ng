@@ -29,7 +29,7 @@ class Chef
       def config_file
         require 'toml'
 
-        file_content = TOML.dump('inputs' => { new_resource.name => [new_resource.config] })
+        file_content = TOML::Generator.new('inputs' => { new_resource.name => [new_resource.config] }).body
 
         t = Chef::Resource::File.new("input_#{new_resource.name}", run_context)
         t.path ::File.join(node['telegraf']['conf_d_dir'], "input-#{new_resource.name}.conf")

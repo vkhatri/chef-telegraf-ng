@@ -18,12 +18,14 @@
 #
 
 if Chef::Resource::ChefGem.method_defined?(:compile_time)
-  chef_gem 'toml-rb' do
+  chef_gem 'toml' do
     compile_time true
+    version '~> 0.1.2'
   end
 else
-  chef_gem 'toml-rb' do
+  chef_gem 'toml' do
     action :nothing
+    version '~> 0.1.2'
   end.run_action(:install)
 end
 
