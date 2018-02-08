@@ -17,11 +17,11 @@ class Chef
       end
 
       def action_create
-        new_resource.updated_by_last_action(config_file)
+        config_file
       end
 
       def action_delete
-        new_resource.updated_by_last_action(config_file)
+        config_file
       end
 
       protected

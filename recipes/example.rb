@@ -33,7 +33,7 @@ telegraf_input 'cpu' do
 end
 
 telegraf_input 'disk' do
-  config ignore_fs: %w(tmpfs devtmpfs)
+  config ignore_fs: %w[tmpfs devtmpfs]
 end
 
 telegraf_input 'net' do

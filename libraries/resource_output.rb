@@ -12,7 +12,7 @@ class Chef
         @provides = :telegraf_output
         @provider = Chef::Provider::TelegrafOutput
         @action = :create
-        @allowed_actions = [:create, :delete, :nothing]
+        @allowed_actions = %i[create delete nothing]
         @name = name
       end
 

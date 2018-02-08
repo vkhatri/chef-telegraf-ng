@@ -17,19 +17,12 @@
 # limitations under the License.
 #
 
-if Chef::Resource::ChefGem.method_defined?(:compile_time)
-  chef_gem 'toml' do
-    compile_time true
-    version '~> 0.1.2'
-  end
-else
-  chef_gem 'toml' do
-    action :nothing
-    version '~> 0.1.2'
-  end.run_action(:install)
+chef_gem 'toml' do
+  compile_time true
+  version node['telegraf']['toml_gem_version']
 end
 
-include_recipe 'yum-plugin-versionlock::default' if node['platform'] == 'rhel' || node['platform'] == 'centos'
+include_recipe 'yum-plugin-versionlock::default' if %w[rhel amazon fedora].include?(node['platform_family'])
 
 include_recipe 'telegraf-ng::install'
 include_recipe 'telegraf-ng::config'

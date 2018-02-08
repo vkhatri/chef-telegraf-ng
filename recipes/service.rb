@@ -24,7 +24,7 @@ ruby_block 'delay telegraf service start' do
   not_if { node['telegraf']['disable_service'] }
 end
 
-service_action = node['telegraf']['disable_service'] ? [:disable, :stop] : [:enable, :nothing]
+service_action = node['telegraf']['disable_service'] ? %i[disable stop] : %i[enable nothing]
 
 service 'telegraf' do
   supports :status => true, :restart => true
